@@ -29,6 +29,11 @@ void loop() {
        servo2.write(90); 
        delay(500);
     }
+    else{
+        servo1.write(0);
+        servo2.write(0); 
+        delay(500);
+    }
     MyLCD.clear();
     MyLCD.setCursor(0,0); 
     MyLCD.print(MyDHT.readTemperature()); 
