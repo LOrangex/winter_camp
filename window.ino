@@ -10,13 +10,17 @@
 
 Servo servo1; 
 Servo servo2; 
-DHT myDHT (dhtpin, DHT11); 
+DHT myDHT (dhtpin, DHT11);
+LiquidCrystal_I2C MyLCD(0x27,16,2); 
 
 void setup() {
     pinMode(photoPin, INPUT); 
     servo1.attach(servo1Pin);
     servo2.attach(servo2Pin); 
     myDHT.begin();
+    MyLCD.init();  
+    MyLCD.backlight();
+
 }
 
 void loop() {
@@ -25,5 +29,13 @@ void loop() {
        servo2.write(90); 
        delay(500);
     }
+    MyLCD.clear();
+    MyLCD.setCursor(0,0); 
+    MyLCD.print(MyDHT.readTemperature()); 
+    MyLCD.print("C");
+    MyLCD.setCursor(0,1); 
+    MyLCD.print(MyDHT.readHumidity());
+    MyLCD.print("%");
+    delay(500);
 }
 
